@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/server.js",
+    "dev": "nodemon --ignore frontend backend/server.js",
     "create-product": "./scripts/create-product.zsh",
     "delete-product": "./scripts/delete-product.zsh",
     "get-products": "./scripts/get-products.zsh",
