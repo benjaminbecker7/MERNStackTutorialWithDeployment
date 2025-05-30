@@ -10,6 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useToast,
   VStack,
 } from '@chakra-ui/react'
 import { useState } from 'react'
@@ -20,6 +21,8 @@ function UpdatingProductModal({ productToUpdate, onClose }) {
   const [updatingProduct, setUpdatingProduct] = useState(productToUpdate)
 
   const [isImageLoadingError, setIsImageLoadingError] = useState(false)
+
+  const toast = useToast()
 
   return (
     <Modal isOpen={true} onClose={onClose}>
@@ -84,8 +87,27 @@ function UpdatingProductModal({ productToUpdate, onClose }) {
         <ModalFooter gap={3}>
           <Button
             colorScheme="blue"
-            onClick={() => {
-              updateProduct(updatingProduct)
+            onClick={async () => {
+              const { success, message } = await updateProduct(updatingProduct)
+
+              if (!success) {
+                toast({
+                  title: 'Error',
+                  description: message,
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                })
+                return
+              }
+
+              toast({
+                title: 'Success',
+                description: 'Product updated successfully',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+              })
               onClose()
             }}
           >
