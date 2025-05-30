@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --ignore frontend backend/server.js",
+    "dev": "NODE_ENV=development nodemon --ignore frontend backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "NODE_ENV=production node backend/server.js",
     "create-product": "./scripts/create-product.zsh",
     "delete-product": "./scripts/delete-product.zsh",
     "get-products": "./scripts/get-products.zsh",
@@ -16,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "mongoose": "^8.15.1"
   },
   "devDependencies": {
